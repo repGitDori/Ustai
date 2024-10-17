@@ -1,0 +1,26 @@
+name: Run Ustai Tool
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-ustai:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Ustai Tool
+        run: python Ustai.py
