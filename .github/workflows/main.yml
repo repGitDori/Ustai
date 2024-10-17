@@ -20,7 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements file found."; fi
 
       - name: Run Ustai Tool
+        env:
+          USER_NAME: "John_Doe"
+          TOOL_NAME: "ImageAnalyzer"
+          CHOICE: "2"  # Adjust the priority choice (1-5)
+          DESCRIPTION: "This is a description of the issue."
         run: python Ustai.py

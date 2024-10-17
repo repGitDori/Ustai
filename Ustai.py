@@ -1,11 +1,15 @@
+import os
 import datetime
 
 # Function to prompt the user, assign priority, and save the result to a file
 def get_priority_and_save():
-    # Prompt for the user's name and the tool they're using
-    user_name = input("Please enter your name: ").strip().replace(" ", "_")
-    tool_name = input("Please enter the name of the tool you are using: ").strip().replace(" ", "_")
-    
+    # Use environment variables for non-interactive input
+    user_name = os.getenv("USER_NAME", "default_user").strip().replace(" ", "_")
+    tool_name = os.getenv("TOOL_NAME", "default_tool").strip().replace(" ", "_")
+
+    print(f"User: {user_name}, Tool: {tool_name}")
+
+    # Rest of the code stays the same
     print("\nWelcome! Let's figure out the priority of your issue.")
     print("Please select the category that best describes your issue:")
     print("1. Fixing bugs or improving core functionality")
@@ -14,11 +18,11 @@ def get_priority_and_save():
     print("4. Integrating with other tools or devices")
     print("5. Adding new features or innovation")
 
-    # Get user input for category
-    choice = int(input("Enter the number that corresponds to the issue (1-5): "))
+    # Assign a default value if input can't be provided
+    choice = int(os.getenv("CHOICE", "1"))
 
-    # Ask for the description of the issue
-    description = input("\nPlease describe the issue in a few sentences: ")
+    # Example input handling:
+    description = os.getenv("DESCRIPTION", "No description provided.")
 
     # Determine the priority title based on user input
     if choice == 1:
